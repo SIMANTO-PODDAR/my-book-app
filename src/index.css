@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+
+.saira-stencil {
+    font-family: "Saira Stencil", sans-serif;
+}
