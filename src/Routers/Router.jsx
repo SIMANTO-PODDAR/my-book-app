@@ -5,6 +5,7 @@ import { Component, Suspense } from "react";
 import Fallback from "../assets/Components/Fallback/Fallback";
 import Book from "../assets/Components/Book/Book";
 import NotFound from "../assets/Components/NotFound/NotFound";
+import ListedBooks from "../assets/Components/ListedBooks/ListedBooks";
 
 const booksData = async () => {
     const res = await fetch('/booksData.json');
@@ -34,6 +35,11 @@ const router = createBrowserRouter([
                         <Book booksPromise={booksPromise} />
                     </Suspense>
             },
+            {
+                path: 'listedbooks',
+                Component: ListedBooks
+
+            }
 
         ]
     },

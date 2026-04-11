@@ -4,28 +4,42 @@ import { Link, useParams } from "react-router";
 const Book = ({ booksPromise }) => {
     const booksData = use(booksPromise);
     const { bookId } = useParams();
-
     const book = booksData.find((book) => book.bookId == bookId);
 
     return (
-        <div className="flex justify-center m-5">
-            <div className="card card-side bg-base-100 shadow-sm ">
-                <div className=" w-96 h-150">
-                    <figure className="h-full w-full object-cover">
-                        <img
-                            src={book.image}
-                            alt={book.bookName} />
-                    </figure>
-                </div>
-                <div className="card-body">
-                    <h2 className="card-title font-bold text-2xl">{book.bookName}</h2>
-                    <p className="w-100 text-justify">{book.review}</p>
-                    <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Watch</button>
+        <>
+            <div className="flex justify-center m-5">
+                <div className="card card-side bg-base-100 shadow-sm ">
+                    <div className=" w-96 h-150">
+                        <figure className="h-full w-full object-cover">
+                            <img
+                                src={book.image}
+                                alt={book.bookName} />
+                        </figure>
+                    </div>
+                    <div className="card-body">
+                        <h2 className="card-title font-bold text-2xl">{book.bookName}</h2>
+                        <h3 className="text-xl font-bold">Author: {book.author}</h3>
+                        <p className="w-100 text-justify">{book.review}</p>
+                        <h3 className="text-xl">Category: {book.category}</h3>
+                        <h3 className="text-xl">Tags:
+                            {book.tags.map((tag, ind) =>
+                                <span className="btn btn-info btn-sm mx-1" key={ind}>{tag}</span>)}
+                        </h3>
+
+
+                        <div className="card-actions justify-end items-center">
+                            <p className="font-bold">Add to -</p>
+                            <button className="btn btn-success">Read list</button>
+                            <button className="btn btn-primary">Wish list</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <Link to='/' className="btn flex justify-center">
+                Go Back
+            </Link>
+        </>
     );
 };
 

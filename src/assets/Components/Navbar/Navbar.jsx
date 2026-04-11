@@ -9,8 +9,8 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-center flex">
                     <ul className="menu menu-horizontal px-1">
-                        <li><a>Listed Books</a></li>
-                        <li><Link to='404'>Pages to Read</Link></li>
+                        <li><Link to='/listedbooks'>Listed Books</Link></li>
+                        <li><a>Pages to Read</a></li>
                     </ul>
                 </div>
                 <div className="navbar-end">
