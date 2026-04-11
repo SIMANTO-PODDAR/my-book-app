@@ -1,5 +1,6 @@
 import { use } from "react";
 import { FcRating } from "react-icons/fc";
+import { Link } from "react-router";
 
 const AllBooks = ({ booksPromise }) => {
     const booksData = use(booksPromise);
@@ -34,7 +35,9 @@ const Book = ({ book }) => {
                         <div className="badge badge-secondary"><span className="text-2xl"><FcRating /></span>{book.rating}</div>
                     </h2>
                     <div className="card-actions justify-end">
-                        <div className="btn badge-outline">Details</div>
+                        <Link to={`bookId/${book.bookId}`}>
+                            <div className="btn badge-outline">Details</div>
+                        </Link>
                     </div>
                 </div>
             </div>

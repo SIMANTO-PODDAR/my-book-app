@@ -1,8 +1,10 @@
 import { createBrowserRouter } from "react-router";
 import Root from "../assets/Root/Root";
 import AllBooks from "../assets/Components/AllBooks/AllBooks";
-import { Suspense } from "react";
+import { Component, Suspense } from "react";
 import Fallback from "../assets/Components/Fallback/Fallback";
+import Book from "../assets/Components/Book/Book";
+import NotFound from "../assets/Components/NotFound/NotFound";
 
 const booksData = async () => {
     const res = await fetch('/booksData.json');
@@ -19,15 +21,27 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Suspense fallback={<Fallback />}>
+                element:
+                    <Suspense fallback={<Fallback />}>
+                        <AllBooks booksPromise={booksPromise} />
+                    </Suspense>
 
-                    <AllBooks booksPromise={booksPromise} />
+            },
+            {
+                path: "bookId/:bookId",
+                element:
+                    <Suspense fallback={<Fallback />}>
+                        <Book booksPromise={booksPromise} />
+                    </Suspense>
+            },
 
-                </Suspense>
-
-            }
         ]
     },
+    {
+        path: "*",
+        Component: NotFound
+    }
+
 ]);
 
 export default router;
