@@ -9,15 +9,44 @@ const Book = ({ booksPromise }) => {
     const { bookId } = useParams();
     const book = booksData.find((book) => book.bookId == bookId);
 
-    const { readList, setReadList } = useContext(readListContext);
+    const { readList, setReadList, wishList, setWishList } = useContext(readListContext);
 
     const hReadList = ({ book }) => {
         if (readList.find(b => b.bookId == book.bookId)) {
-            return alert(`${book.bookName} Already in Read List`)
+            return alert(`"${book.bookName}" Already in Read List`)
         }
         else {
-            setReadList([...readList, book]);
-            alert(`${book.bookName} Add to Read List`)
+
+            if (wishList.find(b => b.bookId == book.bookId)) {
+                const newWishList = wishList.filter(b => b.bookId != book.bookId)
+
+                setWishList(newWishList);
+
+                setReadList([...readList, book]);
+                alert(`"${book.bookName}" Add to Read List 
+                    and Removed From Wish List `)
+            }
+            else {
+                setReadList([...readList, book]);
+                alert(`"${book.bookName}" Add to Read List`)
+            }
+
+
+
+
+        }
+    }
+
+    const hWishList = ({ book }) => {
+        if (readList.find(b => b.bookId == book.bookId)) {
+            return alert(`"${book.bookName}" Can NOT add to Wish List because it is already on the Read List`)
+        }
+        if (wishList.find(b => b.bookId == book.bookId)) {
+            return alert(`"${book.bookName}" Already in Wish List`)
+        }
+        else {
+            setWishList([...wishList, book]);
+            alert(`"${book.bookName}" Add to Wish List`)
 
         }
     }
@@ -47,7 +76,7 @@ const Book = ({ booksPromise }) => {
                         <div className="card-actions justify-end items-center">
                             <p className="font-bold">Add to -</p>
                             <button onClick={() => hReadList({ book })} className="btn btn-success">Read list</button>
-                            <button className="btn btn-primary">Wish list</button>
+                            <button onClick={() => hWishList({ book })} className="btn btn-primary">Wish list</button>
                         </div>
                     </div>
                 </div>

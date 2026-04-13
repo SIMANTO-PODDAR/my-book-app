@@ -6,7 +6,7 @@ import { readListContext } from "../../Contexts/Contexts";
 
 const ListedBooks = () => {
 
-    const { readList } = useContext(readListContext);
+    const { readList, wishList } = useContext(readListContext);
 
     return (
         <div className="my-3">
@@ -28,17 +28,17 @@ const ListedBooks = () => {
 
 
 
-                <input type="radio" name="my_tabs_3" className="tab" aria-label="Wish list" />
+                <input type="radio" name="my_tabs_3" className="tab" aria-label={`Wish list (${wishList.length})`} />
                 <div className={`tab-content bg-base-100 border-base-300 p-6`}>
 
                     <div className={`
-                        ${false == 0 ? 'hidden' : ''}`}>
+                        ${wishList.length == 0 ? 'hidden' : ''}`}>
 
                         <WishList />
 
                     </div>
 
-                    <div className={` ${false == 0 ? 'text-center text-2xl font-bold' : 'hidden'}`}>
+                    <div className={` ${wishList.length != 0 ? 'hidden' : 'text-center text-2xl font-bold'}`}>
                         No Book In Wish List!
                     </div>
                 </div>
