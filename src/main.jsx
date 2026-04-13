@@ -5,12 +5,18 @@ import './index.css';
 import { RouterProvider } from "react-router/dom";
 import router from './Routers/Router';
 
+import Contexts from './assets/Contexts/Contexts';
+
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
 
-    <RouterProvider router={router} />
+    <Contexts>
+
+      <RouterProvider router={router} />
+
+    </Contexts>
 
   </StrictMode>,
 );

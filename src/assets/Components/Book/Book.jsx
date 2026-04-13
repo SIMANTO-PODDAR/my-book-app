@@ -1,10 +1,26 @@
 import { use } from "react";
 import { Link, useParams } from "react-router";
 
+import { useContext } from "react";
+import { readListContext } from "../../Contexts/Contexts";
+
 const Book = ({ booksPromise }) => {
     const booksData = use(booksPromise);
     const { bookId } = useParams();
     const book = booksData.find((book) => book.bookId == bookId);
+
+    const { readList, setReadList } = useContext(readListContext);
+
+    const hReadList = ({ book }) => {
+        if (readList.find(b => b.bookId == book.bookId)) {
+            return alert(`${book.bookName} Already in Read List`)
+        }
+        else {
+            setReadList([...readList, book]);
+            alert(`${book.bookName} Add to Read List`)
+
+        }
+    }
 
     return (
         <>
@@ -30,7 +46,7 @@ const Book = ({ booksPromise }) => {
 
                         <div className="card-actions justify-end items-center">
                             <p className="font-bold">Add to -</p>
-                            <button className="btn btn-success">Read list</button>
+                            <button onClick={() => hReadList({ book })} className="btn btn-success">Read list</button>
                             <button className="btn btn-primary">Wish list</button>
                         </div>
                     </div>
